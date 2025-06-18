@@ -1,0 +1,126 @@
+/* Navbar.css */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.top-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #1c1c1c;
+  padding: 10px 20px;
+  color: white;
+}
+
+.logo {
+  height: 40px;
+}
+
+.bike-btn {
+  background-color: red;
+  color: white;
+  padding: 8px 12px;
+  margin-left: 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  max-width: 500px;
+  margin: 0 20px;
+}
+
+.search-container input {
+  padding: 8px;
+  flex: 1;
+}
+
+.search-container select {
+  padding: 8px;
+  margin-left: 5px;
+}
+
+.search-btn {
+  background: red;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.account-cart {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.account span {
+  display: block;
+  font-size: 13px;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.cart {
+  position: relative;
+  font-size: 16px;
+}
+
+.cart-count {
+  background: red;
+  color: white;
+  font-size: 10px;
+  padding: 2px 5px;
+  border-radius: 50%;
+  position: absolute;
+  top: -8px;
+  right: -10px;
+}
+
+.bottom-nav {
+  display: flex;
+  flex-wrap: wrap;
+  background: white;
+  padding: 10px 20px;
+  border-top: 1px solid #eee;
+}
+
+.nav-item {
+  position: relative;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-weight: 500;
+  color: #333;
+}
+
+.dropdown-arrow {
+  margin-left: 4px;
+  font-size: 12px;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  z-index: 100;
+  min-width: 150px;
+}
+
+.dropdown-item {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.dropdown-item:hover {
+  background: #f2f2f2;
+}
