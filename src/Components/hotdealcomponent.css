@@ -1,0 +1,28 @@
+.hot-selling-section {
+  padding: 20px;
+}
+
+.hot-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hot-header h2 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.hot-header a {
+  font-size: 14px;
+  color: red;
+  text-decoration: none;
+}
+
+.products-grid {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 20px;
+  overflow-x: auto;
+  padding-top: 20px;
+}
