@@ -3,9 +3,17 @@
   border: 1px solid #eee;
   padding: 12px;
   position: relative;
+  display: flex;
+  flex-direction: column;
+
   background-color: #fff;
 }
-
+.product-card img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 4px;
+}
 .save-label {
   position: absolute;
   top: 10px;
@@ -25,6 +33,10 @@
 
 .product-info {
   margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
 }
 
 .price {

@@ -27,11 +27,7 @@ const ProductCard = ({
         </p>
         <p className="product-title">{title}</p>
         <p className="product-brand">{brand}</p>
-        {showColorBox && <div className="color-box"></div>}
-        <div className="emi-row">
-          <span>or ₹{emi}/Month</span>
-          <button className="buy-btn">Buy on EMI &gt;</button>
-        </div>
+        {/* {showColorBox && <div className="color-box"></div>} */}
       </div>
     </div>
   );

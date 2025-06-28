@@ -2,7 +2,7 @@
 import React from "react";
 import ProductCard from "./IndividualProduct";
 import "./hotdealcomponent.css";
-
+import { Link } from "react-router-dom";
 const productData = [
   {
     image:
@@ -40,7 +40,8 @@ const productData = [
     emi: 750,
   },
   {
-    image: "/images/product5.png",
+    image:
+      "https://5.imimg.com/data5/ANDROID/Default/2024/6/431139131/ED/GK/YW/41419325/product-jpeg-500x500.jpg",
     title: "EJEAS Q8 MESH Motorcycle Intercom System",
     brand: "EJEAS",
     price: "6,499.00",
@@ -49,7 +50,8 @@ const productData = [
     emi: 1625,
   },
   {
-    image: "/images/product6.png",
+    image:
+      "https://5.imimg.com/data5/ANDROID/Default/2024/6/431139131/ED/GK/YW/41419325/product-jpeg-500x500.jpg",
     title: "Polish Exhaust For Gt 650/Interceptor 650-Redrooster Stellar",
     brand: "RED ROOSTER",
     price: "21,500.00",
@@ -68,7 +70,14 @@ const HotSellingProducts = () => {
       </div>
       <div className="products-grid">
         {productData.map((product, index) => (
-          <ProductCard key={index} {...product} />
+          <Link
+            to={`/product/${index}`}
+            key={index}
+            state={{ product }}
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
+            <ProductCard key={index} {...product} />
+          </Link>
         ))}
       </div>
     </div>

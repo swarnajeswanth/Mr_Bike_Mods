@@ -1,5 +1,5 @@
 .hot-selling-section {
-  padding: 20px;
+  padding: 60px;
 }
 
 .hot-header {
@@ -17,6 +17,10 @@
   font-size: 14px;
   color: red;
   text-decoration: none;
+}
+
+.products-grid::-webkit-scrollbar {
+  display: none;
 }
 
 .products-grid {

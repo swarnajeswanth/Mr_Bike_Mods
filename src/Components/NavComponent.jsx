@@ -1,19 +1,22 @@
-import React, { useState } from "react";
-import "./NavComponent.css";
-// import logo from "../assets/logo.png";
-import {
-  FaSearch,
-  FaShoppingCart,
-  FaChevronDown,
-  FaUserCircle,
-} from "react-icons/fa";
+import React, { useState, useEffect, useRef } from "react";
+import "./navcomponent.css";
+import { FaChevronDown } from "react-icons/fa";
+import gsap from "gsap";
 import HeaderComponent from "./HeaderComponent";
 
 const Navbar = () => {
   const [openDropdown, setOpenDropdown] = useState("");
+  const scrollRef = useRef();
+  const tweenRef = useRef();
+  const handleMouseEnter = (menu) => {
+    setOpenDropdown(menu);
+    tweenRef.current.pause(); // Pause the GSAP animation
+  };
 
-  const handleMouseEnter = (menu) => setOpenDropdown(menu);
-  const handleMouseLeave = () => setOpenDropdown("");
+  const handleMouseLeave = () => {
+    setOpenDropdown("");
+    tweenRef.current.resume(); // Resume the GSAP animation
+  };
 
   const mainMenu = [
     { label: "New Arrivals!!" },
@@ -31,32 +34,54 @@ const Navbar = () => {
     { label: "Wholesale" },
   ];
 
+  useEffect(() => {
+    const el = scrollRef.current;
+    const totalWidth = el.scrollWidth / 2;
+
+    const tween = gsap.to(el, {
+      x: -totalWidth,
+      duration: 20,
+      ease: "linear",
+      repeat: -1,
+    });
+
+    tweenRef.current = tween;
+
+    return () => {
+      tween.kill();
+    };
+  }, []);
+
   return (
     <div>
       <HeaderComponent />
       <div className="bottom-nav">
-        {mainMenu.map((item, index) => (
-          <div
-            key={index}
-            className="nav-item"
-            onMouseEnter={() => handleMouseEnter(item.label)}
-            onMouseLeave={handleMouseLeave}
-          >
-            {item.label}
-            {item.dropdown && (
-              <FaChevronDown size={10} className="dropdown-icon" />
-            )}
-            {item.dropdown && openDropdown === item.label && (
-              <div className="dropdown-menu">
-                {item.dropdown.map((sub, i) => (
-                  <div key={i} className="dropdown-item">
-                    {sub}
+        <div className="scrolling-container">
+          <div className="scrolling-names" ref={scrollRef}>
+            {[...mainMenu, ...mainMenu].map((item, index) => (
+              <div
+                key={index}
+                className="nav-item"
+                onMouseEnter={() => handleMouseEnter(item.label)}
+                onMouseLeave={handleMouseLeave}
+              >
+                {item.label}
+                {item.dropdown && (
+                  <FaChevronDown size={10} className="dropdown-icon" />
+                )}
+                {item.dropdown && openDropdown === item.label && (
+                  <div className="dropdown-menu">
+                    {item.dropdown.map((sub, i) => (
+                      <div key={i} className="dropdown-item">
+                        {sub}
+                      </div>
+                    ))}
                   </div>
-                ))}
+                )}
               </div>
-            )}
+            ))}
           </div>
-        ))}
+        </div>
       </div>
     </div>
   );
