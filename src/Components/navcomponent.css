@@ -95,7 +95,6 @@
 
 .menu-item {
   position: relative;
-  padding-bottom: 30px; /* prevent dropdown clipping */
 }
 
 .dropdown {

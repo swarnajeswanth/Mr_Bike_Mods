@@ -1,5 +1,4 @@
-// RetailerDashboard.js
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./retailerdashboard.css";
 import {
   FaChartLine,
@@ -9,11 +8,13 @@ import {
   FaEnvelope,
   FaSignOutAlt,
   FaThLarge,
+  FaBars,
 } from "react-icons/fa";
 import { gsap } from "gsap";
 
 const RetailerDashboard = () => {
   const dashboardRef = useRef();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
     gsap.fromTo(
@@ -25,8 +26,15 @@ const RetailerDashboard = () => {
 
   return (
     <div className="retailer-dashboard" ref={dashboardRef}>
-      <aside className="sidebar">
+      <div className="mobile-header">
+        <FaBars
+          className="hamburger-icon"
+          onClick={() => setSidebarOpen(!sidebarOpen)}
+        />
         <h2 className="logo">Mr BikeModz</h2>
+      </div>
+
+      <aside className={`sidebar ${sidebarOpen ? "open" : ""}`}>
         <nav>
           <ul>
             <li>
@@ -55,6 +63,7 @@ const RetailerDashboard = () => {
           </ul>
         </nav>
       </aside>
+
       <main className="main-content">
         <h2>Welcome back, Retailer Name</h2>
         <div className="overview-grid">

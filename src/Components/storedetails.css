@@ -20,19 +20,21 @@
 
 .store-info {
   flex: 1;
-  padding: 30px;
+  /* padding: 30px; */
   min-width: 300px;
 }
 
 .store-info h3 {
   margin-bottom: 15px;
   color: #111;
+  padding: 0 20px;
 }
 
 .store-info p {
   margin: 10px 0;
   color: #333;
   line-height: 1.6;
+  padding: 0 20px;
 }
 
 .direction-btn {

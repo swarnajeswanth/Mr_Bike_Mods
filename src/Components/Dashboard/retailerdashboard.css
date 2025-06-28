@@ -1,7 +1,7 @@
-/* RetailerDashboard.css */
 .retailer-dashboard {
   display: flex;
   font-family: sans-serif;
+  min-height: 100vh;
 }
 
 .sidebar {
@@ -9,7 +9,6 @@
   background-color: #222;
   color: white;
   padding: 20px;
-  height: 100vh;
 }
 
 .sidebar .logo {
@@ -31,7 +30,7 @@
 }
 
 .sidebar nav ul .sub {
-  padding-left: 20px;
+  padding-left: 30px;
   font-size: 14px;
 }
 
@@ -60,4 +59,82 @@
 
 .recent-orders {
   margin-top: 20px;
+}
+
+/* ---------------------
+   ✅ Responsive styles
+--------------------- */
+@media (max-width: 768px) {
+  .retailer-dashboard {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    padding: 15px;
+  }
+
+  .sidebar nav ul li {
+    padding: 8px 0;
+    font-size: 14px;
+  }
+
+  .main-content {
+    padding: 20px 15px;
+  }
+
+  .overview-grid,
+  .charts-grid {
+    grid-template-columns: 1fr;
+  }
+}
+/* Mobile Header */
+.mobile-header {
+  display: none;
+  background-color: #222;
+  color: white;
+  padding: 15px 20px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hamburger-icon {
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+  .retailer-dashboard {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    position: absolute;
+    top: 60px;
+    left: -100%;
+    width: 200px;
+    height: calc(100vh - 60px);
+    background-color: #222;
+    transition: left 0.3s ease;
+    z-index: 1000;
+  }
+
+  .sidebar.open {
+    left: 0;
+  }
+
+  .main-content {
+    padding: 20px;
+  }
+
+  .overview-grid,
+  .charts-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mobile-header {
+    display: flex;
+  }
 }
