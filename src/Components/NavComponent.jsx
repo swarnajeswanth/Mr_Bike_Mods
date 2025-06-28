@@ -62,7 +62,7 @@ const Navbar = () => {
   return (
     <div className="navbar-container">
       <div className="scroll-wrapper">
-        <div className="scrolling-menu" ref={scrollRef}>
+        <div className="scroll-content" ref={scrollRef}>
           {[...mainMenu, ...mainMenu].map((item, index) => (
             <div
               key={index}
