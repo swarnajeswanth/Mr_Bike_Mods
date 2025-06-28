@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { useLocation, useParams } from "react-router-dom";
-import "./SingleProductPage.css";
+import "./singleproductpage.css";
 import gsap from "gsap";
 
 const SingleProductPage = () => {
