@@ -1,10 +1,12 @@
-// components/AddProduct.jsx
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useState } from "react";
 import "./addproductpage.css";
 import gsap from "gsap";
+import useImageUpload from "../Utils/UseImageUploader"; // Import your custom hook
 
 const AddProduct = () => {
   const formRef = useRef(null);
+  const [file, setFile] = useState(null); // For storing the selected file
+  const [preview, setPreview] = useState(null); // For displaying image preview
   const [formData, setFormData] = useState({
     title: "",
     brand: "",
@@ -13,14 +15,8 @@ const AddProduct = () => {
     description: "",
   });
 
-  //   useEffect(() => {
-  //     gsap.from(formRef.current, {
-  //       opacity: 0,
-  //       y: 30,
-  //       duration: 0.6,
-  //       ease: "power2.out",
-  //     });
-  //   }, []);
+  // Use the custom hook for image upload functionality
+  const { uploadedUrl, loading, error, handleFileChange } = useImageUpload();
 
   const handleChange = (e) => {
     setFormData((prev) => ({
@@ -31,6 +27,7 @@ const AddProduct = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     console.log("Product submitted:", formData);
     alert("Product added successfully!");
     // You could reset the form or redirect here
@@ -39,7 +36,15 @@ const AddProduct = () => {
   return (
     <div className="add-product-container" ref={formRef}>
       <h2>Add New Product</h2>
-      <form className="add-product-form" onSubmit={handleSubmit}>
+      <form
+        className="add-product-form"
+        onSubmit={(e) => {
+          e.preventDefault(); // Prevent default form submission
+          handleSubmit(e);
+          // Log the preview URL
+          handleFileChange(file); // Call the image upload function with the selected file
+        }}
+      >
         <label>Title:</label>
         <input
           name="title"
@@ -64,8 +69,34 @@ const AddProduct = () => {
           required
         />
 
-        <label>Image URL:</label>
-        <input name="image" value={formData.image} onChange={handleChange} />
+        <label>Image:</label>
+        <input
+          type="file"
+          accept="image/*" // Ensure only image files are selectable
+          onChange={(e) => {
+            setFile(e.target.files[0]); // Log the selected file
+            setPreview(URL.createObjectURL(e.target.files[0])); // Set preview for the selected image
+          }}
+          required
+        />
+
+        {/* Show image preview if available */}
+        {preview && <img src={preview} alt="Preview" width="200" />}
+
+        {/* Display loading spinner while uploading */}
+        {loading && <p>Uploading...</p>}
+
+        {/* Show error message if upload fails */}
+        {error && <p style={{ color: "red" }}>{error}</p>}
+
+        {/* Once image is uploaded, show the uploaded URL */}
+        {uploadedUrl && (
+          <div>
+            <h3>Uploaded Image:</h3>
+            <img src={uploadedUrl} alt="Uploaded" width="300" />
+            <p>Image URL: {uploadedUrl}</p>
+          </div>
+        )}
 
         <label>Description:</label>
         <textarea

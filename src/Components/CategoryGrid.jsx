@@ -16,7 +16,7 @@ const categories = [
   },
   {
     title: "BLUETOOTH & INTERCOM",
-    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR17Y7zKLUJpwnFa9FsV64DZNkcaOUrMnrK1Fs-FeHzFQAnFpa0q55HvLM&s",
+    img: "https://drive.google.com/uc?export=view&id=1H58DdxmxzybYSCk6Uyt0m5iExLDOz4zw",
   },
   {
     title: "BOOTS",
@@ -49,7 +49,13 @@ const CategoryGrid = () => {
     <div className="category-grid">
       {categories.map((cat, idx) => (
         <Link to={`/category/${cat.title}`} key={idx} className="category-card">
-          <img src={cat.img} alt={cat.title} className="category-img" />
+          <img
+            src={cat.img}
+            alt={cat.title}
+            style={{ width: "100%", borderRadius: "8px" }}
+            className="category-img"
+            referrerPolicy="no-referrer"
+          />
           <div className="category-overlay">
             <h2>{cat.title}</h2>
             <button>Shop Now</button>

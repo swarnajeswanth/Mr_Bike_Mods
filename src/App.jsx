@@ -9,6 +9,7 @@ import CustomerDashboard from "./Components/Dashboard/CustomerDashboard";
 import SingleProductPage from "./Components/SingleProductPage";
 import AddProduct from "./Components/AddProductPage";
 import CartContainer from "./Components/CartPage";
+
 const App = () => {
   return (
     <Routes>
@@ -21,6 +22,7 @@ const App = () => {
       <Route path="/product/:id" element={<SingleProductPage />} />
       <Route path="/add-product" element={<AddProduct />} />
       <Route path="/cart" element={<CartContainer />} />
+      {/* <Route path="/imageupload" element={<ImageUploader />} /> */}
     </Routes>
   );
 };
