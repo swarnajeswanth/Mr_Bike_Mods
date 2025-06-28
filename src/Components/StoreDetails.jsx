@@ -16,7 +16,7 @@ const StoreDetails = () => {
           </p>
           <p>Monday - Sunday : 10 AM - 9 PM</p>
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d522.8209176827916!2d79.97835780781789!3d14.44756935425168!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1751115825946!5m2!1sen!2sin"
+            src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3863.6441945144543!2d79.97575337510325!3d14.44765718602077!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTTCsDI2JzUxLjYiTiA3OcKwNTgnNDIuMCJF!5e0!3m2!1sen!2sin!4v1751128807784!5m2!1sen!2sin"
             style={{
               width: "400px",
               height: "250px",
@@ -25,9 +25,7 @@ const StoreDetails = () => {
             allowfullscreen=""
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
-          >
-            Get directions
-          </iframe>
+          ></iframe>
         </div>
 
         {/* Right Panel - Image */}

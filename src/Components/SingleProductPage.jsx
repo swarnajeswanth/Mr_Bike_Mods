@@ -8,6 +8,14 @@ const SingleProductPage = () => {
   const { state } = useLocation();
   const { id } = useParams();
   const product = state?.product;
+  // useEffect(() => {
+  //   gsap.from(containerRef.current, {
+  //     opacity: 0,
+  //     y: 50,
+  //     duration: 0.6,
+  //     ease: "power2.out",
+  //   });
+  // }, []);
 
   if (!product) {
     return <div className="product-container">Product not found.</div>;

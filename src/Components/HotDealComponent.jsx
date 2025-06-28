@@ -1,8 +1,9 @@
-// components/HotSellingProducts.jsx
-import React from "react";
+import React, { useRef, useState, useEffect } from "react";
 import ProductCard from "./IndividualProduct";
 import "./hotdealcomponent.css";
 import { Link } from "react-router-dom";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+
 const productData = [
   {
     image:
@@ -62,23 +63,77 @@ const productData = [
 ];
 
 const HotSellingProducts = () => {
+  const scrollRef = useRef(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+
+  const updateButtons = () => {
+    const container = scrollRef.current;
+    if (!container) return;
+    setCanScrollLeft(container.scrollLeft > 0);
+    setCanScrollRight(
+      container.scrollLeft + container.clientWidth < container.scrollWidth - 1
+    );
+  };
+
+  useEffect(() => {
+    updateButtons();
+    const container = scrollRef.current;
+    container.addEventListener("scroll", updateButtons);
+    window.addEventListener("resize", updateButtons);
+    return () => {
+      container.removeEventListener("scroll", updateButtons);
+      window.removeEventListener("resize", updateButtons);
+    };
+  }, []);
+
+  const scroll = (dir) => {
+    const container = scrollRef.current;
+    const itemWidth = container.children[0]?.offsetWidth || 300;
+    const gap = 20; // same as CSS gap
+    const scrollBy = itemWidth + gap;
+    container.scrollBy({
+      left: dir === "left" ? -scrollBy : scrollBy,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <div className="hot-selling-section">
       <div className="hot-header">
         <h2>HOT SELLING PRODUCTS!!</h2>
         <a href="#">View all</a>
       </div>
-      <div className="products-grid">
-        {productData.map((product, index) => (
-          <Link
-            to={`/product/${index}`}
-            key={index}
-            state={{ product }}
-            style={{ textDecoration: "none", color: "inherit" }}
-          >
-            <ProductCard key={index} {...product} />
-          </Link>
-        ))}
+
+      <div className="scroll-wrapper">
+        <button
+          className="scroll-btn left"
+          onClick={() => scroll("left")}
+          disabled={!canScrollLeft}
+        >
+          <FaChevronLeft />
+        </button>
+
+        <div className="products-grid" ref={scrollRef}>
+          {productData.map((product, index) => (
+            <Link
+              to={`/product/${index}`}
+              key={index}
+              state={{ product }}
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              <ProductCard {...product} />
+            </Link>
+          ))}
+        </div>
+
+        <button
+          className="scroll-btn right"
+          onClick={() => scroll("right")}
+          disabled={!canScrollRight}
+        >
+          <FaChevronRight />
+        </button>
       </div>
     </div>
   );
