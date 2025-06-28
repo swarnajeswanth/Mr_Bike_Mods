@@ -1,8 +1,8 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import "./addproductpage.css";
 import gsap from "gsap";
 import useImageUpload from "../Utils/UseImageUploader"; // Import your custom hook
-
+import axios from "axios";
 const AddProduct = () => {
   const formRef = useRef(null);
   const [file, setFile] = useState(null); // For storing the selected file
@@ -17,6 +17,17 @@ const AddProduct = () => {
 
   // Use the custom hook for image upload functionality
   const { uploadedUrl, loading, error, handleFileChange } = useImageUpload();
+  const [images, setImages] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:4000/files")
+      .then((res) => {
+        console.log("Images loaded:", res);
+        setImages(res.data);
+      })
+      .catch((err) => console.error("Failed to load images", err));
+  }, []);
 
   const handleChange = (e) => {
     setFormData((prev) => ({
@@ -107,6 +118,18 @@ const AddProduct = () => {
 
         <button type="submit">Add Product</button>
       </form>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}>
+        {images.map((img) => (
+          <div key={img.fileId}>
+            <img
+              src={img.url}
+              alt={img.name}
+              style={{ width: 200, borderRadius: 8 }}
+            />
+            <p>{img.name}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
