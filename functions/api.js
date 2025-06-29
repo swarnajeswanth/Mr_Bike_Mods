@@ -71,7 +71,7 @@ const imagekit = new ImageKit({
 //   }
 // });
 
-app.post("/add-product", async (req, res) => {
+app.post("/api/add-product", async (req, res) => {
   try {
     console.log("➡️ Received body:", req.body);
     await connectDB();
