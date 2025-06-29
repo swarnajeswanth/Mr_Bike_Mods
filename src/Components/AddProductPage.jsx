@@ -21,7 +21,7 @@ const AddProduct = () => {
 
   useEffect(() => {
     axios
-      .get("/api/files")
+      .get("https://mrbikemodz.netlify.app/.netlify/functions/api/files")
       .then((res) => setImages(res.data || []))
       .catch((err) => console.error("Failed to load images", err));
   }, []);
