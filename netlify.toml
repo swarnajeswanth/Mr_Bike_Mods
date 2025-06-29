@@ -1,9 +1,9 @@
 [build]
-  publish = "dist"              # ✅ if you're using Vite
-  functions = "netlify/functions"
-  command = "npm run build"
+publish = "dist"                      # ← for Vite
+functions = "netlify/functions"       # ← relative path
+command = "npm run build"
 
 [[redirects]]
-  from = "/api/*"
-  to = "/.netlify/functions/api/:splat"
-  status = 200
+from = "/api/*"
+to = "/.netlify/functions/api/:splat"
+status = 200
