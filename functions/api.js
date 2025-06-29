@@ -97,7 +97,7 @@ app.post("/add-product", async (req, res) => {
 
     const newProduct = new Product({
       name: title,
-      Brand: brand,
+      brand,
       price,
       description,
       imageUrl,
