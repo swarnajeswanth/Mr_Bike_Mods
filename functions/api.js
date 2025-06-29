@@ -57,7 +57,7 @@ app.post("/api/add-product", async (req, res) => {
     res.json({ message: "Product saved", product: saved });
   } catch (err) {
     console.error("Failed to save product:", err);
-    res.status(500).json({ error: "Failed to save product" });
+    res.status(500).json({ error: "Failed to save product", err });
   }
 });
 // Fetch all products endpoint
