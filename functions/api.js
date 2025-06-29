@@ -70,7 +70,7 @@ app.get("/products", async (req, res) => {
   }
 });
 
-app.post("/upload", upload.single("file"), async (req, res) => {
+app.post("/api/upload", upload.single("file"), async (req, res) => {
   try {
     const result = await imagekit.upload({
       file: req.file.buffer,
