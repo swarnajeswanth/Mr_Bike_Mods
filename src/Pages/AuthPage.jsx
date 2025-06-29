@@ -15,7 +15,7 @@ const AuthPage = () => {
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
-    role: "",
+    role: "Retailer",
   });
 
   useEffect(() => {
