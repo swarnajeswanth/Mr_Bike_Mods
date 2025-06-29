@@ -1,9 +1,14 @@
 [build]
-publish = "dist"  # or "build" for CRA
+publish = "dist" # or "build" if you're using Create React App
 functions = "netlify/functions"
 command = "npm run build"
 
 [[redirects]]
 from = "/api/*"
-to = "/.netlify/functions/api/:splat"
+to = "/netlify/functions/api/:splat"
+status = 200
+
+[[redirects]]
+from = "/*"
+to = "/index.html"
 status = 200

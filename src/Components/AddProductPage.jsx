@@ -21,9 +21,14 @@ const AddProduct = () => {
 
   useEffect(() => {
     axios
-      .get("netlify/functions/files")
-      .then((res) => setImages(res.data || []))
-      .catch((err) => console.error("Failed to load images", err));
+      .get("/api/files")
+      .then((res) => {
+        console.log("ImageKit Files:", res.data);
+        setImages(res.data || []);
+      })
+      .catch((err) => {
+        console.error("Failed to load images", err);
+      });
   }, []);
 
   const handleChange = (e) => {
