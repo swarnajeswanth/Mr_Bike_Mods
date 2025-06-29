@@ -1,20 +1,16 @@
 import express from "express";
 import serverless from "serverless-http";
-import multer from "multer";
 import cors from "cors";
-import dotenv from "dotenv";
+import multer from "multer";
 import ImageKit from "imagekit";
+import dotenv from "dotenv";
 
 dotenv.config();
-const app = express();
-// app.use((req, res, next) => {
-//   console.log(`[API HIT] ${req.method} ${req.path}`);
-//   next();
-// });
 
+const app = express();
+const upload = multer();
 app.use(cors());
 app.use(express.json());
-const upload = multer();
 
 const imagekit = new ImageKit({
   publicKey: process.env.PUBLIC_API_KEY,
@@ -22,41 +18,40 @@ const imagekit = new ImageKit({
   urlEndpoint: process.env.URL_ENDPOINT,
 });
 
+// Upload endpoint
 app.post("/upload", upload.single("file"), async (req, res) => {
   try {
+    const file = req.file;
     const result = await imagekit.upload({
-      file: req.file.buffer,
-      fileName: req.file.originalname,
+      file: file.buffer,
+      fileName: file.originalname,
     });
     res.json({ url: result.url });
-  } catch (err) {
+  } catch (error) {
+    console.error("Upload error:", error);
     res.status(500).json({ error: "Upload failed" });
   }
 });
 
-app.get("/api/files", async (req, res) => {
-  console.log("Fetching files with path:", req.query);
+// List all files (paginated)
+app.get("/allfiles", async (req, res) => {
   try {
-    const result = await imagekit.listFiles({
-      // path: req.query.path || "/",
-      limit: 20,
-    });
+    const response = await imagekit.listFiles({ limit: 10 });
+    res.json(response);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch image list" });
+  }
+});
+
+// List files by folder path
+app.get("/files", async (req, res) => {
+  const folderPath = req.query.path || "/";
+  try {
+    const result = await imagekit.listFiles({ path: folderPath, limit: 20 });
     res.json(result);
   } catch (err) {
     res.status(500).json({ error: "Failed to fetch files" });
   }
-});
-
-app.get("/api/allfiles", async (req, res) => {
-  try {
-    const result = await imagekit.listFiles({ limit: 10 });
-    res.json(result);
-  } catch (err) {
-    res.status(500).json({ error: "Failed to fetch all files" });
-  }
-});
-app.get("/", (req, res) => {
-  res.send("API root working");
 });
 
 export const handler = serverless(app);
