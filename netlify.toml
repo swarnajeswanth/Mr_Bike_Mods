@@ -1,6 +1,6 @@
 [build]
-publish = "dist"                      # ← for Vite
-functions = "netlify/functions"       # ← relative path
+publish = "dist"                   # ← use "build" if Create React App
+functions = "netlify/functions"
 command = "npm run build"
 
 [[redirects]]
