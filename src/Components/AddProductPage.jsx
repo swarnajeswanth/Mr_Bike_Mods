@@ -74,7 +74,10 @@ const AddProduct = () => {
         category: "General",
       };
 
-      const res = await axios.post("/api/add-product", payload);
+      const res = await axios.post("/api/add-product", payload, {
+        headers: { "Content-Type": "application/json" },
+      });
+
       console.log("Product added:", res);
       alert("Product added successfully!");
 
