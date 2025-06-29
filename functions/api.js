@@ -25,7 +25,7 @@ const imagekit = new ImageKit({
 });
 
 // Add product endpoint
-app.post("/add-product", async (req, res) => {
+app.post("/api/add-product", async (req, res) => {
   try {
     await connectDB();
 
