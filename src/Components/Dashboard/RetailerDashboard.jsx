@@ -11,12 +11,12 @@ import {
   FaBars,
 } from "react-icons/fa";
 import { gsap } from "gsap";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const RetailerDashboard = () => {
   const dashboardRef = useRef();
   const [sidebarOpen, setSidebarOpen] = useState(false);
-
+  const navigate = useNavigate();
   useEffect(() => {
     gsap.fromTo(
       dashboardRef.current,
@@ -44,8 +44,8 @@ const RetailerDashboard = () => {
             <li>
               <FaBoxOpen /> Orders
             </li>
-            <li className="sub">
-              - <Link to="/add-product">Add</Link>
+            <li className="sub" onClick={() => navigate("/add-product")}>
+              - Add
             </li>
             <li className="sub">- Manage Inventory</li>
             <li>
