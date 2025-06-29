@@ -1,3 +1,7 @@
+
+[functions]
+  node_bundler = "esbuild"
+
 [build]
   functions = "functions"
   command = "npm run build"
