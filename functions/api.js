@@ -25,11 +25,57 @@ const imagekit = new ImageKit({
 });
 
 // Add product endpoint
-app.post("/api/add-product", async (req, res) => {
-  try {
-    await connectDB();
+// app.post("/api/add-product", async (req, res) => {
+//   try {
+//     await connectDB();
 
-    console.log("Received data:", req.body); // ✅ Log the payload
+//     console.log("Received data:", req.body); // ✅ Log the payload
+
+//     const {
+//       title,
+//       brand,
+//       price,
+//       description,
+//       imageUrl,
+//       category,
+//       stock,
+//       isAvailable,
+//       rating,
+//     } = req.body;
+
+//     // Validate essential fields
+//     // if (!title || !brand || !price || !description || !imageUrl) {
+//     //   console.error("Missing required fields");
+//     //   return res.status(400).json({ error: "Missing required fields" });
+//     // }
+
+//     const newProduct = new Product({
+//       name: title,
+//       Brand: brand,
+//       price,
+//       description,
+//       imageUrl,
+//       category,
+//       stock,
+//       isAvailable,
+//       rating,
+//     });
+//     console.log("New product object:", newProduct); // ✅ Log the product object
+//     const saved = await newProduct.save();
+//     console.log("Product saved:", saved);
+
+//     res.json({ message: "Product saved", product: saved });
+//   } catch (err) {
+//     console.error("❌ Error saving product:", err);
+//     res.status(500).json({ error: "Failed to save product" });
+//   }
+// });
+
+app.post("/add-product", async (req, res) => {
+  try {
+    console.log("➡️ Received body:", req.body);
+    await connectDB();
+    console.log("✅ MongoDB connected");
 
     const {
       title,
@@ -44,10 +90,10 @@ app.post("/api/add-product", async (req, res) => {
     } = req.body;
 
     // Validate essential fields
-    // if (!title || !brand || !price || !description || !imageUrl) {
-    //   console.error("Missing required fields");
-    //   return res.status(400).json({ error: "Missing required fields" });
-    // }
+    if (!title || !brand || !price || !description || !imageUrl) {
+      console.error("❌ Missing required fields");
+      return res.status(400).json({ error: "Missing required fields" });
+    }
 
     const newProduct = new Product({
       name: title,
@@ -60,16 +106,19 @@ app.post("/api/add-product", async (req, res) => {
       isAvailable,
       rating,
     });
-    console.log("New product object:", newProduct); // ✅ Log the product object
+
     const saved = await newProduct.save();
-    console.log("Product saved:", saved);
+    console.log("✅ Product saved:", saved);
 
     res.json({ message: "Product saved", product: saved });
   } catch (err) {
-    console.error("❌ Error saving product:", err);
-    res.status(500).json({ error: "Failed to save product" });
+    console.error("❌ Server error:", err);
+    res
+      .status(500)
+      .json({ error: "Failed to save product", reason: err.message });
   }
 });
+
 // app.post("/api/add-product", async (req, res) => {
 //   try {
 //     await connectDB();
