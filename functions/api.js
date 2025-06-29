@@ -82,7 +82,7 @@ app.post("/api/add-product", upload.none(), async (req, res) => {
       brand,
       price,
       description,
-      image,
+      imageUrl,
       category,
       stock,
       isAvailable,
@@ -95,7 +95,7 @@ app.post("/api/add-product", upload.none(), async (req, res) => {
     console.log(price);
     console.log(description);
     console.log(image);
-    if (!title || !brand || !price || !description || !image) {
+    if (!title || !brand || !price || !description || !imageUrl) {
       console.error("❌ Missing required fields");
       return res.status(400).json({ error: "Missing required fields" });
     }
@@ -105,7 +105,7 @@ app.post("/api/add-product", upload.none(), async (req, res) => {
       brand,
       price,
       description,
-      imageUrl: image,
+      imageUrl,
       category,
       stock,
       isAvailable,
