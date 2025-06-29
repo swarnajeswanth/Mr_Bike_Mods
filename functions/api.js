@@ -93,7 +93,7 @@ app.post("/api/add-product", upload.none(), async (req, res) => {
     if (!title || !brand || !price || !description || !image) {
       console.error("❌ Missing required fields");
       return res.status(400).json({ error: "Missing required fields" });
-  
+    }
 
     const newProduct = new Product({
       name: title,
