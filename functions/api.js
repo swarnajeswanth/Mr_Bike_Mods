@@ -90,7 +90,7 @@ app.post("/api/add-product", upload.none(), async (req, res) => {
     } = req.body;
 
     // Validate essential fields
-    console.log(req);
+    console.log(req.apiGateway.body);
     console.log(title);
     console.log(brand);
     console.log(price);
