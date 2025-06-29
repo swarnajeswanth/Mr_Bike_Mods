@@ -1,5 +1,5 @@
 [build]
-publish = "dist"                   # ← use "build" if Create React App
+publish = "dist"  # or "build" for CRA
 functions = "netlify/functions"
 command = "npm run build"
 

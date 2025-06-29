@@ -30,9 +30,10 @@ app.post("/upload", upload.single("file"), async (req, res) => {
 });
 
 app.get("/files", async (req, res) => {
+  console.log("Fetching files with path:", req.query);
   try {
     const result = await imagekit.listFiles({
-      path: req.query.path || "/",
+      // path: req.query.path || "/",
       limit: 20,
     });
     res.json(result);
