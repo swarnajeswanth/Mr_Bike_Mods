@@ -5,7 +5,8 @@ import cors from "cors";
 import dotenv from "dotenv";
 import ImageKit from "imagekit";
 import { connectDB } from "../src/Utils/db.js";
-import product from "../models/Product.js";
+import Product from "../models/Product.js";
+
 dotenv.config();
 const app = express();
 // app.use((req, res, next) => {
