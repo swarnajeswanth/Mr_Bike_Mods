@@ -90,11 +90,7 @@ app.post("/api/add-product", upload.none(), async (req, res) => {
     } = req.body;
 
     // Validate essential fields
-    console.log(title);
-    console.log(brand);
-    console.log(price);
-    console.log(description);
-    console.log(image);
+
     if (!title || !brand || !price || !description || !imageUrl) {
       console.error("❌ Missing required fields");
       return res.status(400).json({ error: "Missing required fields" });
