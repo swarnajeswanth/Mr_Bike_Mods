@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import "./CustomerDashboard.css";
+import "./customerdashboard.css";
 import {
   FaHeart,
   FaBoxOpen,
