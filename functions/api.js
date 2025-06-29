@@ -25,9 +25,11 @@ const imagekit = new ImageKit({
 });
 
 // Add product endpoint
-app.post("/api/add-product", async (req, res) => {
+app.post("/add-product", async (req, res) => {
   try {
     await connectDB();
+
+    console.log("Received data:", req.body); // ✅ Log the payload
 
     const {
       title,
@@ -40,6 +42,12 @@ app.post("/api/add-product", async (req, res) => {
       isAvailable,
       rating,
     } = req.body;
+
+    // Validate essential fields
+    if (!title || !brand || !price || !description || !imageUrl) {
+      console.error("Missing required fields");
+      return res.status(400).json({ error: "Missing required fields" });
+    }
 
     const newProduct = new Product({
       name: title,
@@ -54,12 +62,15 @@ app.post("/api/add-product", async (req, res) => {
     });
 
     const saved = await newProduct.save();
+    console.log("Product saved:", saved);
+
     res.json({ message: "Product saved", product: saved });
   } catch (err) {
-    console.error("Failed to save product:", err);
+    console.error("❌ Error saving product:", err);
     res.status(500).json({ error: "Failed to save product" });
   }
 });
+
 // Fetch all products endpoint
 app.get("/products", async (req, res) => {
   try {
