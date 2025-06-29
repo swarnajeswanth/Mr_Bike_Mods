@@ -44,10 +44,10 @@ app.post("/api/add-product", async (req, res) => {
     } = req.body;
 
     // Validate essential fields
-    if (!title || !brand || !price || !description || !imageUrl) {
-      console.error("Missing required fields");
-      return res.status(400).json({ error: "Missing required fields" });
-    }
+    // if (!title || !brand || !price || !description || !imageUrl) {
+    //   console.error("Missing required fields");
+    //   return res.status(400).json({ error: "Missing required fields" });
+    // }
 
     const newProduct = new Product({
       name: title,
@@ -60,7 +60,7 @@ app.post("/api/add-product", async (req, res) => {
       isAvailable,
       rating,
     });
-
+    console.log("New product object:", newProduct); // ✅ Log the product object
     const saved = await newProduct.save();
     console.log("Product saved:", saved);
 
