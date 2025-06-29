@@ -36,12 +36,35 @@ const AddProduct = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("Product submitted:", formData);
-    alert("Product added successfully!");
-    // You could reset the form or redirect here
+    if (!uploadedUrl) {
+      alert("Please wait for the image to finish uploading.");
+      return;
+    }
+
+    try {
+      const payload = {
+        title: formData.title,
+        brand: formData.brand,
+        price: formData.price,
+        description: formData.description,
+        imageUrl: uploadedUrl, // from your image upload hook
+        stock: 10, // or get from a form field
+        isAvailable: true,
+        rating: 0,
+        category: "General", // or get from a form field
+      };
+
+      const res = await axios.post("/api/add-product", payload);
+
+      console.log("Saved product:", res.data);
+      alert("Product added successfully!");
+    } catch (error) {
+      console.error("Error saving product:", error);
+      alert("Failed to add product.");
+    }
   };
 
   return (
