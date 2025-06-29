@@ -73,7 +73,7 @@ const imagekit = new ImageKit({
 
 app.post("/api/add-product", upload.none(), async (req, res) => {
   try {
-    console.log("➡️ Received body:", req.body);
+    console.log("➡️ Received body:", ...req.body); // Log the incoming request body
     await connectDB();
     console.log("✅ MongoDB connected");
 
