@@ -75,6 +75,7 @@ const AddProduct = () => {
       };
 
       const res = await axios.post("/api/add-product", payload);
+      console.log("Product added:", res);
       alert("Product added successfully!");
 
       // 3. Optionally reset form
