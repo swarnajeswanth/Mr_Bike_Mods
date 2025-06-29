@@ -1,0 +1,158 @@
+/* authpage.css */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.auth-container {
+  height: 100vh;
+  width: 100vw;
+  background: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-box {
+  width: 900px;
+  height: 520px;
+  background: #fff;
+  display: flex;
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Panels */
+.form-panel {
+  width: 50%;
+  padding: 40px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: 0.5s;
+}
+
+.form-panel h2 {
+  font-size: 26px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.form-panel input,
+.form-panel select {
+  margin-bottom: 15px;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+.form-panel a {
+  background-color: #222;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+  width: 100%;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-panel p {
+  margin-top: 12px;
+  font-size: 14px;
+}
+
+.form-panel span {
+  color: #007bff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.mask-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(135deg, #0074d9, #001f3f);
+  color: white;
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translateX(0%);
+  pointer-events: none;
+}
+/* MOBILE RESPONSIVE STYLES */
+
+@media screen and (max-width: 768px) {
+  .auth-box {
+    flex-direction: column;
+    height: auto;
+    width: 90%;
+    padding: 20px 10px;
+  }
+
+  .mask-overlay {
+    display: none;
+  }
+
+  .flip-card {
+    perspective: 1000px;
+    width: 100%;
+  }
+
+  .flip-card-inner {
+    width: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.8s ease-in-out;
+    position: relative;
+  }
+
+  .form-panel {
+    position: absolute;
+    width: 100%;
+    backface-visibility: hidden;
+    padding: 24px;
+    background: white;
+    border-radius: 20px;
+    min-height: 480px;
+  }
+
+  .signup-panel {
+    transform: rotateY(180deg);
+  }
+  .flip-card-inner {
+    width: 100%;
+    height: 500px; /* or min-height: 100vh if needed */
+    transform-style: preserve-3d;
+    transition: transform 0.8s ease-in-out;
+    position: relative;
+  }
+}
+.form-btn {
+  background-color: #222;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}

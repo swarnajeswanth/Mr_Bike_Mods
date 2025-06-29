@@ -1,0 +1,93 @@
+.hot-selling-section {
+  position: relative;
+}
+
+.hot-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 60px;
+}
+
+.hot-header h2 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.hot-header a {
+  font-size: 14px;
+  color: red;
+  text-decoration: none;
+}
+
+.scroll-wrapper-hot-deal {
+  position: relative;
+  padding: 20px 60px;
+}
+
+.products-grid {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 20px;
+
+  scroll-behavior: smooth;
+  scrollbar-width: none; /* Firefox */
+}
+
+.products-grid::-webkit-scrollbar {
+  display: none;
+}
+.products-grid > * {
+  pointer-events: auto; /* allow buttons/cards inside to remain clickable */
+}
+.scroll-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: black;
+  color: white;
+  border: none;
+  font-size: 20px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  z-index: 2;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: 0.3s ease;
+}
+
+.scroll-btn:hover {
+  opacity: 1;
+}
+
+.scroll-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.scroll-btn.left {
+  left: 40px;
+}
+
+.scroll-btn.right {
+  right: 60px;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .hot-header h2 {
+    font-size: 18px;
+    width: 50%;
+  }
+  .scroll-btn.left {
+    left: 0px;
+  }
+
+  .scroll-btn.right {
+    right: 0px;
+  }
+}
