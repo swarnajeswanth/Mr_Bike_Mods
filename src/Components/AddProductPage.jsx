@@ -22,7 +22,7 @@ const AddProduct = () => {
   useEffect(() => {
     axios
       .get("/api/files?path=Dashboard")
-      .then((res) => setImages(res.data))
+      .then((res) => setImages(res.data || []))
       .catch((err) => console.error("Failed to load images", err));
   }, []);
 
@@ -116,16 +116,17 @@ const AddProduct = () => {
         <button type="submit">Add Product</button>
       </form>
       <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}>
-        {images.map((img) => (
-          <div key={img.fileId}>
-            <img
-              src={img.url}
-              alt={img.name}
-              style={{ width: 200, borderRadius: 8 }}
-            />
-            <p>{img.name}</p>
-          </div>
-        ))}
+        {Array.isArray(images) &&
+          images.map((img, idx) => (
+            <div key={idx}>
+              <img
+                src={img.url}
+                alt={img.name}
+                style={{ width: 200, borderRadius: 8 }}
+              />
+              <p>{img.name}</p>
+            </div>
+          ))}
       </div>
     </div>
   );
