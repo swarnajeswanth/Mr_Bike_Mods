@@ -7,6 +7,11 @@ import ImageKit from "imagekit";
 
 dotenv.config();
 const app = express();
+app.use((req, res, next) => {
+  console.log(`[API HIT] ${req.method} ${req.path}`);
+  next();
+});
+
 app.use(cors());
 app.use(express.json());
 const upload = multer();
