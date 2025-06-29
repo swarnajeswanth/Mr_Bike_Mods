@@ -2,31 +2,29 @@ import { useState } from "react";
 import axios from "axios";
 
 const useImageUpload = () => {
-  // For displaying image preview
-  const [uploadedUrl, setUploadedUrl] = useState(""); // For storing uploaded image URL
-  const [loading, setLoading] = useState(false); // For loading state during upload
-  const [error, setError] = useState(null); // For handling errors
+  const [uploadedUrl, setUploadedUrl] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  const handleFileChange = (f) => {
-    console.log("File selected:", f); // Log the selected file
-    const file = f;
+  const handleFileChange = (file) => {
+    if (!file) return;
 
     const formData = new FormData();
     formData.append("file", file);
 
-    setLoading(true); // Start loading
+    setLoading(true);
+    setError(null);
 
-    // Upload the file
     axios
-      .post("http://localhost:4000/upload", formData)
+      .post("/api/upload", formData) // ✅ updated path
       .then((res) => {
-        setUploadedUrl(res.data.url); // Set the uploaded URL
-        setLoading(false); // Stop loading
+        setUploadedUrl(res.data.url);
+        setLoading(false);
       })
       .catch((err) => {
-        setError("Upload failed!"); // Handle error
-        setLoading(false); // Stop loading
-        console.error(err);
+        setError("Upload failed!");
+        setLoading(false);
+        console.error("Upload error:", err);
       });
   };
 

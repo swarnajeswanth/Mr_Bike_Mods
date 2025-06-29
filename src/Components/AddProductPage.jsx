@@ -21,7 +21,7 @@ const AddProduct = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:4000/files?path=Dashboard") // matches the folder in ImageKit
+      .get("/api/files?path=Dashboard")
       .then((res) => setImages(res.data))
       .catch((err) => console.error("Failed to load images", err));
   }, []);
