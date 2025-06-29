@@ -4,7 +4,8 @@ import multer from "multer";
 import cors from "cors";
 import dotenv from "dotenv";
 import ImageKit from "imagekit";
-
+import { connectDB } from "../utils/db.js";
+import Product from "../models/Product.js";
 dotenv.config();
 const app = express();
 // app.use((req, res, next) => {
@@ -22,7 +23,54 @@ const imagekit = new ImageKit({
   urlEndpoint: process.env.URL_ENDPOINT,
 });
 
-app.post("/upload", upload.single("file"), async (req, res) => {
+// Add product endpoint
+app.post("/add-product", async (req, res) => {
+  try {
+    await connectDB();
+
+    const {
+      title,
+      brand,
+      price,
+      description,
+      imageUrl,
+      category,
+      stock,
+      isAvailable,
+      rating,
+    } = req.body;
+
+    const newProduct = new Product({
+      name: title,
+      Brand: brand,
+      price,
+      description,
+      imageUrl,
+      category,
+      stock,
+      isAvailable,
+      rating,
+    });
+
+    const saved = await newProduct.save();
+    res.json({ message: "Product saved", product: saved });
+  } catch (err) {
+    console.error("Failed to save product:", err);
+    res.status(500).json({ error: "Failed to save product" });
+  }
+});
+// Fetch all products endpoint
+app.get("/products", async (req, res) => {
+  try {
+    await connectDB();
+    const products = await Product.find().sort({ createdAt: -1 });
+    res.json(products);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch products" });
+  }
+});
+
+app.post("/api/upload", upload.single("file"), async (req, res) => {
   try {
     const result = await imagekit.upload({
       file: req.file.buffer,
