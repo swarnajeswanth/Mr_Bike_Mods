@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./highlightSection.css";
+import "./highlightsection.css";
 
 import Main from "../assets/Main.png"; // Assuming you have a CSS file for styling
 import Main1 from "../assets/Main1.png";
