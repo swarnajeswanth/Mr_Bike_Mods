@@ -21,7 +21,8 @@ const AddProduct = () => {
 
   useEffect(() => {
     axios
-      .get("/api/files?path=Dashboard")
+      .get("/api/files")
+
       .then((res) => setImages(res.data || []))
       .catch((err) => console.error("Failed to load images", err));
   }, []);

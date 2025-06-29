@@ -1,11 +1,9 @@
 [build]
-  publish = "dist"         # ⬅️ use "build" for Create React App, "dist" for Vite
+  publish = "dist"              # ✅ if you're using Vite
   functions = "netlify/functions"
   command = "npm run build"
 
-# Redirect frontend API requests to your Express handler
 [[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/api/:splat"
   status = 200
-
