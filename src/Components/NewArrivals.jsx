@@ -1,6 +1,6 @@
 // components/NewArrivals.jsx
 import React from "react";
-import "./NewArrivals.css";
+import "./newarrivals.css";
 
 const NewArrivals = () => {
   return (
