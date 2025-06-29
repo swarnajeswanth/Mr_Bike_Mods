@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import "./navcomponent.css";
 import { FaChevronDown } from "react-icons/fa";
 import gsap from "gsap";
-
+import { useDispatch, useSelector } from "react-redux";
 const mainMenu = [
   { label: "Shop By Bike", dropdown: ["KTM", "Royal Enfield", "Honda"] },
   { label: "Accessories" },

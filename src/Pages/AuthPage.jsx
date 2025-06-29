@@ -1,13 +1,22 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./authpage.css";
 import { gsap } from "gsap";
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../redux/UserSlice";
 const AuthPage = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(true);
   const maskRef = useRef();
   const flipCardRef = useRef();
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [loginData, setLoginData] = useState({
+    email: "",
+    password: "",
+    role: "",
+  });
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth <= 768);
@@ -34,16 +43,59 @@ const AuthPage = () => {
   const loginForm = (
     <div className="form-panel login-panel">
       <h2>Login</h2>
-      <input type="email" placeholder="Email" required />
-      <input type="password" placeholder="Password" required />
-      <select required>
+      <input
+        type="email"
+        placeholder="Email"
+        value={loginData.email}
+        onChange={(e) => setLoginData({ ...loginData, email: e.target.value })}
+        required
+      />
+      <input
+        type="password"
+        placeholder="Password"
+        value={loginData.password}
+        onChange={(e) =>
+          setLoginData({ ...loginData, password: e.target.value })
+        }
+        required
+      />
+      <select
+        value={loginData.role}
+        onChange={(e) => setLoginData({ ...loginData, role: e.target.value })}
+        required
+      >
         <option value="">Select Role</option>
         <option value="Customer">Customer</option>
         <option value="Retailer">Retailer</option>
       </select>
-      <Link to="/" className="form-btn">
+
+      <button
+        className="form-btn"
+        onClick={(e) => {
+          e.preventDefault();
+          const { email, password, role } = loginData;
+
+          if (!email || !password || !role) {
+            toast.error("Please fill all fields.");
+            return;
+          }
+
+          // Dispatch user login
+          dispatch(
+            loginUser({
+              ...loginData,
+              email,
+              role,
+            })
+          );
+
+          toast.success("Logged in successfully!");
+          navigate("/"); // Redirect after login
+        }}
+      >
         Login
-      </Link>
+      </button>
+
       <p>
         Don’t have an account?{" "}
         <span onClick={() => setIsLogin(false)}>Sign Up</span>
@@ -62,9 +114,14 @@ const AuthPage = () => {
         <option value="Customer">Customer</option>
         <option value="Retailer">Retailer</option>
       </select>
-      <Link to="/" className="form-btn">
+      <Link
+        to="#"
+        className="form-btn"
+        onClick={() => toast.success("Account created successfully!")}
+      >
         Sign Up
       </Link>
+
       <p>
         Already have an account?{" "}
         <span onClick={() => setIsLogin(true)}>Login</span>

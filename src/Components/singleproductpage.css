@@ -1,11 +1,11 @@
 /* Base Styles */
 .product-container {
   display: flex;
-  height: 100vh;
+  height: 95vh;
   padding: 2rem;
   max-width: 1200px;
   margin: auto;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .product-left {
@@ -46,7 +46,6 @@
 /* Right side scrollable */
 .product-right {
   flex: 1;
-  overflow-y: auto;
   padding-left: 2rem;
   display: flex;
   flex-direction: column;
@@ -175,4 +174,31 @@
     width: 60px;
     height: 60px;
   }
+}
+.product-reviews {
+  max-height: 200px;
+  overflow-y: scroll;
+  padding-right: 0.5rem;
+}
+
+/* Scrollbar styling (optional) */
+.product-reviews::-webkit-scrollbar {
+  width: 6px;
+}
+.product-reviews::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+}
+.back-button {
+  background: none;
+  color: #3f51b5;
+  border-radius: 14px;
+  padding: 10px;
+  left: 20px;
+  transition: color 0.2s;
+  position: absolute;
+}
+
+.back-button:hover {
+  color: #303f9f;
 }

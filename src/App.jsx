@@ -9,21 +9,26 @@ import CustomerDashboard from "./Components/Dashboard/CustomerDashboard";
 import SingleProductPage from "./Components/SingleProductPage";
 import AddProduct from "./Components/AddProductPage";
 import CartContainer from "./Components/CartPage";
-
+import store from "./redux/Bikestore.js";
+import { Provider } from "react-redux";
+import { Toaster } from "react-hot-toast";
 const App = () => {
   return (
-    <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/about" element={<AboutPage />} />
-      <Route path="/auth" element={<LoginSignup />} />
-      <Route path="/retailer" element={<RetailerDashboard />} />
-      <Route path="/customer" element={<CustomerDashboard />} />
-      <Route path="/product/:title" element={<SingleProductPage />} />
-      <Route path="/product/:id" element={<SingleProductPage />} />
-      <Route path="/add-product" element={<AddProduct />} />
-      <Route path="/cart" element={<CartContainer />} />
-      {/* <Route path="/imageupload" element={<ImageUploader />} /> */}
-    </Routes>
+    <Provider store={store}>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/auth" element={<LoginSignup />} />
+        <Route path="/retailer-profile" element={<RetailerDashboard />} />
+        <Route path="/customer-profile" element={<CustomerDashboard />} />
+        <Route path="/product/:title" element={<SingleProductPage />} />
+        <Route path="/product/:id" element={<SingleProductPage />} />
+        <Route path="/add-product" element={<AddProduct />} />
+        <Route path="/cart" element={<CartContainer />} />
+        {/* <Route path="/imageupload" element={<ImageUploader />} /> */}
+      </Routes>
+      <Toaster position="top-center" reverseOrder={false} />
+    </Provider>
   );
 };
 

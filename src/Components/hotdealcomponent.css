@@ -1,5 +1,4 @@
 .hot-selling-section {
-  padding: 20px 60px;
   position: relative;
 }
 
@@ -7,6 +6,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 20px 60px;
 }
 
 .hot-header h2 {
@@ -20,8 +20,9 @@
   text-decoration: none;
 }
 
-.scroll-wrapper {
+.scroll-wrapper-hot-deal {
   position: relative;
+  padding: 20px 60px;
 }
 
 .products-grid {
@@ -29,7 +30,7 @@
   flex-wrap: nowrap;
   overflow-x: auto;
   gap: 20px;
-  padding-top: 20px;
+
   scroll-behavior: smooth;
   scrollbar-width: none; /* Firefox */
 }
@@ -37,7 +38,9 @@
 .products-grid::-webkit-scrollbar {
   display: none;
 }
-
+.products-grid > * {
+  pointer-events: auto; /* allow buttons/cards inside to remain clickable */
+}
 .scroll-btn {
   position: absolute;
   top: 50%;
@@ -67,9 +70,24 @@
 }
 
 .scroll-btn.left {
-  left: -20px;
+  left: 40px;
 }
 
 .scroll-btn.right {
-  right: -20px;
+  right: 60px;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .hot-header h2 {
+    font-size: 18px;
+    width: 50%;
+  }
+  .scroll-btn.left {
+    left: 0px;
+  }
+
+  .scroll-btn.right {
+    right: 0px;
+  }
 }

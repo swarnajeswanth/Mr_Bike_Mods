@@ -105,7 +105,7 @@ const HotSellingProducts = () => {
         <a href="#">View all</a>
       </div>
 
-      <div className="scroll-wrapper">
+      <div className="scroll-wrapper-hot-deal">
         <button
           className="scroll-btn left"
           onClick={() => scroll("left")}

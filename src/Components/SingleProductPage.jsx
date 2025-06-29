@@ -2,12 +2,16 @@ import React, { useEffect, useRef } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import "./singleproductpage.css";
 import gsap from "gsap";
+import { useNavigate } from "react-router-dom";
+import { FaArrowLeft } from "react-icons/fa";
 
 const SingleProductPage = () => {
   const containerRef = useRef(null);
   const { state } = useLocation();
   const { id } = useParams();
   const product = state?.product;
+  const navigate = useNavigate();
+
   // useEffect(() => {
   //   gsap.from(containerRef.current, {
   //     opacity: 0,
@@ -23,6 +27,11 @@ const SingleProductPage = () => {
 
   return (
     <div className="product-container" ref={containerRef}>
+      <button className="back-button" onClick={() => navigate(-1)}>
+        <FaArrowLeft style={{ marginRight: "8px" }} />
+        Back
+      </button>
+
       <div className="product-left">
         <img
           src={product.image}
@@ -66,13 +75,15 @@ const SingleProductPage = () => {
           </p>
 
           <h2>Customer Reviews</h2>
-          <div className="review">
-            <strong>Arjun R.</strong>
-            <p>Great quality! Really comfortable and worth the price.</p>
-          </div>
-          <div className="review">
-            <strong>Sneha P.</strong>
-            <p>Packaging was good and delivery was fast. Would recommend.</p>
+          <div className="product-reviews">
+            <div className="review">
+              <strong>Arjun R.</strong>
+              <p>Great quality! Really comfortable and worth the price.</p>
+            </div>
+            <div className="review">
+              <strong>Sneha P.</strong>
+              <p>Packaging was good and delivery was fast. Would recommend.</p>
+            </div>
           </div>
         </div>
       </div>

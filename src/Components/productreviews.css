@@ -57,7 +57,9 @@
     transform: translateY(0);
   }
 }
-
+.review-form {
+  margin-top: 20px;
+}
 .review-form h3 {
   margin-bottom: 15px;
   color: #222;

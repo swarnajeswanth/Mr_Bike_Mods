@@ -10,6 +10,8 @@ import Main from "../assets/Main.png"; // Assuming you have a CSS file for styli
 import "../index.css";
 import HighlightSection from "../Components/HighlightSection";
 import HeaderComponent from "../Components/HeaderComponent";
+import { toast, Toaster } from "react-hot-toast";
+
 const HomePage = () => {
   return (
     <div style={{ position: "relative", zIndex: 50 }}>
