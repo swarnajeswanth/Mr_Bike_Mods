@@ -4,7 +4,7 @@ import multer from "multer";
 import cors from "cors";
 import dotenv from "dotenv";
 import ImageKit from "imagekit";
-import { connectDB } from "../utils/db.js";
+import { connectDB } from "../src/Utils/db.js";
 import Product from "../models/Product.js";
 dotenv.config();
 const app = express();
