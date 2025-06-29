@@ -7,10 +7,10 @@ import ImageKit from "imagekit";
 
 dotenv.config();
 const app = express();
-app.use((req, res, next) => {
-  console.log(`[API HIT] ${req.method} ${req.path}`);
-  next();
-});
+// app.use((req, res, next) => {
+//   console.log(`[API HIT] ${req.method} ${req.path}`);
+//   next();
+// });
 
 app.use(cors());
 app.use(express.json());
@@ -34,7 +34,7 @@ app.post("/upload", upload.single("file"), async (req, res) => {
   }
 });
 
-app.get("/files", async (req, res) => {
+app.get("/api/files", async (req, res) => {
   console.log("Fetching files with path:", req.query);
   try {
     const result = await imagekit.listFiles({
@@ -47,7 +47,7 @@ app.get("/files", async (req, res) => {
   }
 });
 
-app.get("/allfiles", async (req, res) => {
+app.get("/api/allfiles", async (req, res) => {
   try {
     const result = await imagekit.listFiles({ limit: 10 });
     res.json(result);

@@ -23,12 +23,10 @@ const AddProduct = () => {
     axios
       .get("/api/files")
       .then((res) => {
-        console.log("ImageKit Files:", res.data);
+        console.log("Fetched files:", res.data);
         setImages(res.data || []);
       })
-      .catch((err) => {
-        console.error("Failed to load images", err);
-      });
+      .catch((err) => console.error("Failed to load images", err));
   }, []);
 
   const handleChange = (e) => {
