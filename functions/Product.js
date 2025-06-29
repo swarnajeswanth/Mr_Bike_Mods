@@ -8,13 +8,19 @@ const productSchema = new mongoose.Schema({
   },
   price: Number,
   imageUrl: String,
-  category: String,
+  category: {
+    type: String,
+    default: "",
+    required: false,
+  },
   stock: {
     type: Number,
+    required: false,
     default: 0,
   },
   isAvailable: {
     type: Boolean,
+    required: false,
     default: true,
   },
   brand: {
@@ -26,6 +32,7 @@ const productSchema = new mongoose.Schema({
     default: 0,
     min: 0,
     max: 5,
+    required: false,
   },
   createdAt: {
     type: Date,
