@@ -25,49 +25,58 @@ const imagekit = new ImageKit({
 });
 
 // Add product endpoint
-app.post("/add-product", async (req, res) => {
+// app.post("/add-product", async (req, res) => {
+//   try {
+//     await connectDB();
+
+//     console.log("Received data:", req.body); // ✅ Log the payload
+
+//     const {
+//       title,
+//       brand,
+//       price,
+//       description,
+//       imageUrl,
+//       category,
+//       stock,
+//       isAvailable,
+//       rating,
+//     } = req.body;
+
+//     // Validate essential fields
+//     if (!title || !brand || !price || !description || !imageUrl) {
+//       console.error("Missing required fields");
+//       return res.status(400).json({ error: "Missing required fields" });
+//     }
+
+//     const newProduct = new Product({
+//       name: title,
+//       Brand: brand,
+//       price,
+//       description,
+//       imageUrl,
+//       category,
+//       stock,
+//       isAvailable,
+//       rating,
+//     });
+
+//     const saved = await newProduct.save();
+//     console.log("Product saved:", saved);
+
+//     res.json({ message: "Product saved", product: saved });
+//   } catch (err) {
+//     console.error("❌ Error saving product:", err);
+//     res.status(500).json({ error: "Failed to save product" });
+//   }
+// });
+app.post("/api/add-product", async (req, res) => {
   try {
     await connectDB();
-
-    console.log("Received data:", req.body); // ✅ Log the payload
-
-    const {
-      title,
-      brand,
-      price,
-      description,
-      imageUrl,
-      category,
-      stock,
-      isAvailable,
-      rating,
-    } = req.body;
-
-    // Validate essential fields
-    if (!title || !brand || !price || !description || !imageUrl) {
-      console.error("Missing required fields");
-      return res.status(400).json({ error: "Missing required fields" });
-    }
-
-    const newProduct = new Product({
-      name: title,
-      Brand: brand,
-      price,
-      description,
-      imageUrl,
-      category,
-      stock,
-      isAvailable,
-      rating,
-    });
-
-    const saved = await newProduct.save();
-    console.log("Product saved:", saved);
-
-    res.json({ message: "Product saved", product: saved });
+    res.json({ message: "DB connected successfully" });
   } catch (err) {
-    console.error("❌ Error saving product:", err);
-    res.status(500).json({ error: "Failed to save product" });
+    console.error("DB connection failed:", err);
+    res.status(500).json({ error: "MongoDB connection failed" });
   }
 });
 
