@@ -73,7 +73,7 @@ const imagekit = new ImageKit({
 
 app.post("/api/add-product", upload.none(), async (req, res) => {
   try {
-    console.log("➡️ Received body:", ...req.body); // Log the incoming request body
+    console.log("➡️ Received body:", req.body); // Log the incoming request body
     await connectDB();
     console.log("✅ MongoDB connected");
 
@@ -82,7 +82,7 @@ app.post("/api/add-product", upload.none(), async (req, res) => {
       brand,
       price,
       description,
-      imageUrl,
+      image,
       category,
       stock,
       isAvailable,
@@ -90,17 +90,17 @@ app.post("/api/add-product", upload.none(), async (req, res) => {
     } = req.body;
 
     // Validate essential fields
-    if (!title || !brand || !price || !description || !imageUrl) {
+    if (!title || !brand || !price || !description || !image) {
       console.error("❌ Missing required fields");
       return res.status(400).json({ error: "Missing required fields" });
-    }
+  
 
     const newProduct = new Product({
       name: title,
       brand,
       price,
       description,
-      imageUrl,
+      imageUrl: image,
       category,
       stock,
       isAvailable,
