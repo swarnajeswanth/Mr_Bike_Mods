@@ -49,5 +49,8 @@ app.get("/allfiles", async (req, res) => {
     res.status(500).json({ error: "Failed to fetch all files" });
   }
 });
+app.get("/", (req, res) => {
+  res.send("API root working");
+});
 
 export const handler = serverless(app);
