@@ -71,11 +71,27 @@ const imagekit = new ImageKit({
 //   }
 // });
 
-app.post("/api/add-product", upload.none(), async (req, res) => {
+app.post("/api/add-product", async (req, res) => {
   try {
-    console.log("➡️ Received body:", req.body); // Log the incoming request body
     await connectDB();
     console.log("✅ MongoDB connected");
+
+    // Netlify passes the body as a stringified Buffer if multipart or raw
+    let body = req.body;
+    if (typeof req.body === "string") {
+      body = JSON.parse(req.body);
+    } else if (
+      req.apiGateway &&
+      req.apiGateway.event &&
+      req.apiGateway.event.body
+    ) {
+      try {
+        body = JSON.parse(req.apiGateway.event.body);
+      } catch (err) {
+        console.error("❌ Failed to parse apiGateway body:", err);
+        return res.status(400).json({ error: "Invalid request format" });
+      }
+    }
 
     const {
       title,
@@ -87,19 +103,21 @@ app.post("/api/add-product", upload.none(), async (req, res) => {
       stock,
       isAvailable,
       rating,
-    } = req.body;
+    } = body;
 
-    // Validate essential fields
-    console.log(req.apiGateway.body);
-    console.log(title);
-    console.log(brand);
-    console.log(price);
-    console.log(description);
-    console.log(imageUrl);
+    console.log("Parsed fields:", {
+      title,
+      brand,
+      price,
+      description,
+      imageUrl,
+    });
+
     if (!title || !brand || !price || !description || !imageUrl) {
       console.error("❌ Missing required fields");
       return res.status(400).json({ error: "Missing required fields" });
     }
+    console.log(title, brand, price, description, imageUrl);
 
     const newProduct = new Product({
       name: title,
