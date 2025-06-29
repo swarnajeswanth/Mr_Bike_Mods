@@ -11,6 +11,7 @@ import {
   FaBars,
 } from "react-icons/fa";
 import { gsap } from "gsap";
+import { Link } from "react-router-dom";
 
 const RetailerDashboard = () => {
   const dashboardRef = useRef();
@@ -43,7 +44,9 @@ const RetailerDashboard = () => {
             <li>
               <FaBoxOpen /> Orders
             </li>
-            <li className="sub">- Add</li>
+            <li className="sub">
+              - <Link to="/add-product">Add</Link>
+            </li>
             <li className="sub">- Manage Inventory</li>
             <li>
               <FaTags /> Discount Manager
